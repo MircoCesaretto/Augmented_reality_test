@@ -12,6 +12,7 @@ const App = () => {
     <SafeAreaView>
       <StatusBar />
       <ScrollView>
+        <Text>Prova prova</Text>
 
       </ScrollView>
     </SafeAreaView>
