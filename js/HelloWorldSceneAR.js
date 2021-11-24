@@ -35,14 +35,14 @@ export default class HelloWorldSceneAR extends Component {
       <ViroARScene onTrackingUpdated={this.onTrackingUpdated} >
         <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
         <Viro360Image source={require('./res/test_360.jpg')} />
-        <ViroBox position={[0, -.5, -1]} scale={[.3, .3, .3]} materials={["grid"]} />        
-        <Viro3DObject 
-          source={require('./res/Tree1.obj')}
-          position={[0, -.5, -1]}
-          scale={[.1, .1, .1]}
+        {/* <ViroBox position={[0, -.5, -1]} scale={[.3, .3, .3]} materials={["grid"]} />         */}
+        <Viro3DObject
+          source={require('./res/abstract_cube.obj')}
+          position={[-0.0, -5.5, -1.15]}
           materials={["grid"]}
-          type="OBJ" 
+          type="OBJ"
         />
+
       </ViroARScene>
     );
   }
@@ -58,19 +58,18 @@ export default class HelloWorldSceneAR extends Component {
   // }
 
   componentDidMount = () => {
-    console.log('Mount')
     this.setState({
-      text: 'Hello Enrico!'
+      text: 'Hello Enri!'
     })
   }
 
-  onTrackingUpdated = () => {
-    console.log('Track')
-    this.setState({
-      text: 'Fuck You!!'
-    })
-    console.log('track finish')
-  }
+  // onTrackingUpdated = () => {
+  //   console.log('Track')
+  //   this.setState({
+  //     text: 'Fuck You!!'
+  //   })
+  //   console.log('track finish')
+  // }
 
 
 }
