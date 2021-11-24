@@ -1,28 +1,45 @@
 'use strict';
 
 import React, { Component } from 'react';
-
+import { Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 
-import {
-  ViroARScene,
-  ViroText,
-  ViroConstants,
-  Viro360Image,
-  ViroMaterials,
-  ViroBox,
-  ViroGeometry,
-  Viro3DObject
-} from 'react-viro';
+import { ViroARScene, ViroText, ViroConstants, Viro360Image, ViroMaterials, ViroBox, ViroGeometry, Viro3DObject, ViroFlexView, ViroButton } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
 
   constructor() {
     super();
-
+    this.periodicTable = [
+      {
+        name: "Hydrogen",
+        symbol: "H",
+        atomicNumber: 1,
+        color: "teal"
+      },
+      {
+        name: "Helium",
+        symbol: "He",
+        atomicNumber: 2,
+        color: "gold"
+      },
+      {
+        name: "Litium",
+        symbol: "Li",
+        atomicNumber: 3,
+        color: "pink"
+      },
+      {
+        name: "Beryllium",
+        symbol: "Be",
+        atomicNumber: 4,
+        color: "pink"
+      },
+    ]
     // Set initial state here
     this.state = {
-      text: "Initializing AR..."
+      text: "Initializing AR...",
+      modalDetail: true
     };
 
     // bind 'this' to functions
@@ -30,19 +47,38 @@ export default class HelloWorldSceneAR extends Component {
     // console.log('constr')
   }
 
+
+  handleModalDetail = ()=>{
+    this.setState({
+      modalDetail:!this.state.modalDetail
+    })
+  }
+
   render() {
     return (
       <ViroARScene onTrackingUpdated={this.onTrackingUpdated} >
-        <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
-        <Viro360Image source={require('./res/test_360.jpg')} />
-        {/* <ViroBox position={[0, -.5, -1]} scale={[.3, .3, .3]} materials={["grid"]} />         */}
-        <Viro3DObject
-          source={require('./res/abstract_cube.obj')}
-          position={[-0.0, -5.5, -1.15]}
-          materials={["grid"]}
-          type="OBJ"
-        />
+        <Viro360Image source={require('./res/nasa.jpg')} />
+        <ViroFlexView backgroundColor="white" width={7.0} height={7.0}
+          position={[0, 0.0, -6.0]} >
+          {this.periodicTable.map((el, key) => {
+            return (
+              <ViroFlexView style={styles.elementSquare} key={key} backgroundColor={el.color} width={.7} height={.7} onClick={this.handleModalDetail}>
+                <ViroText style={styles.atomicNumber} text={el.atomicNumber + ""} height={.2} width={.2} />
+                <ViroText style={styles.elementSymbol} text={el.symbol} height={.3} width={.3} />
+                <ViroText style={styles.atomicNumber} text={el.name} height={.2} width={.2} />
+              </ViroFlexView>
 
+            )
+          })}
+
+        </ViroFlexView>
+
+        {
+          this.state.modalDetail &&
+          <ViroFlexView style={styles.modalDetail} backgroundColor="rgba(204, 204, 204, 0.1)" width={3} height={3} position={[0, 0.0, -4.0]}>
+            <ViroText onClick={this.handleModalDetail} style={styles.closeModalDetail} text={"x"} height={.6} width={.6} />
+          </ViroFlexView>
+        }
       </ViroARScene>
     );
   }
@@ -59,7 +95,7 @@ export default class HelloWorldSceneAR extends Component {
 
   componentDidMount = () => {
     this.setState({
-      text: 'Hello Enri!'
+      text: 'ciao'
     })
   }
 
@@ -76,7 +112,7 @@ export default class HelloWorldSceneAR extends Component {
 
 ViroMaterials.createMaterials({
   grid: {
-    diffuseTexture: require('./res/grid_bg.jpg'),
+    diffuseTexture: require('./res/textures/carbon.jpg'),
   },
 });
 
@@ -84,10 +120,26 @@ var styles = StyleSheet.create({
   helloWorldTextStyle: {
     fontFamily: 'Arial',
     fontSize: 30,
-    color: '#ffffff',
+    color: 'black',
     textAlignVertical: 'center',
     textAlign: 'center',
   },
+  elementSquare: {
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  elementSymbol: {
+    textAlign: "center"
+  },
+  atomicNumber: {
+    textAlign: "center",
+    fontSize: 10,
+  },
+  modalDetail: {
+  },
+  closeModalDetail: {
+    color: "black",
+  }
 });
 
 module.exports = HelloWorldSceneAR;
