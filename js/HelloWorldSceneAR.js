@@ -11,8 +11,8 @@ export default class HelloWorldSceneAR extends Component {
   constructor() {
     super();
 
-    this.periodicTable = elements.map(el=>{
-      if(el.type === 'Nonmetal') {
+    this.periodicTable = elements.map(el => {
+      if (el.type === 'Nonmetal') {
         el.color = "#8CED8C"
       }
       if (el.type === 'Noble gas') {
@@ -49,7 +49,7 @@ export default class HelloWorldSceneAR extends Component {
       text: "Initializing AR...",
       modalDetail: false,
       elementSelected: null,
-    };    
+    };
 
     // bind 'this' to functions
     // this._onInitialized = this._onInitialized.bind(this);
@@ -71,7 +71,7 @@ export default class HelloWorldSceneAR extends Component {
   }
 
   getElementColorType = (type) => () => {
-    if(type === 'Nonmetal') {
+    if (type === 'Nonmetal') {
       return "#8CED8C"
     }
     if (type === 'Noble gas') {
@@ -124,16 +124,26 @@ export default class HelloWorldSceneAR extends Component {
               if (el.visibility) {
                 return (
                   <ViroFlexView
-                    style={styles.elementSquare}
-                    key={key}
-                    backgroundColor={el.color}
                     width={1}
                     height={1}
-                    onClick={this.handleModalDetail(el)}
+                    style={{
+                      padding: .05,
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}
                   >
-                    <ViroText style={styles.atomicNumber} text={el.atomicNumber + ""} height={.2} width={.2} />
-                    <ViroText style={styles.elementSymbol} text={el.symbol} height={.3} width={.3} />
-                    <ViroText style={styles.atomicNumber} text={el.name} height={.2} width={.2} />
+                    <ViroFlexView
+                      style={styles.elementSquare}
+                      key={key}
+                      backgroundColor={el.color}
+                      width={.9}
+                      height={.9}
+                      onClick={this.handleModalDetail(el)}
+                    >
+                      <ViroText color='#000000' style={styles.atomicNumber} text={el.atomicNumber + ""} height={.2} width={.2} />
+                      <ViroText color='#000000' style={styles.elementSymbol} text={el.symbol} height={.3} width={.3} />
+                      <ViroText color='#000000' style={styles.atomicNumber} text={el.name} height={.2} width={.2} />
+                    </ViroFlexView>
                   </ViroFlexView>
                 )
               } else {
