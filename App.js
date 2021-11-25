@@ -114,7 +114,7 @@ export default class ViroSample extends Component {
             style={{
               width: Dimensions.get('screen').width,
               height: Dimensions.get('screen').height,
-              backgroundColor: '#fff',
+              backgroundColor: '#001427',
               position: 'absolute',
               left: 0,
               top: 0,
@@ -123,7 +123,7 @@ export default class ViroSample extends Component {
               alignItems: 'center'
             }}
           >
-            <ActivityIndicator size="large" />
+            <ActivityIndicator size="large" color="#8D0801" />
           </View>
         }
 
