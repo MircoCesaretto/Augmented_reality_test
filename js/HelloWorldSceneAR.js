@@ -44,6 +44,8 @@ export default class HelloWorldSceneAR extends Component {
       }
       return el
     })
+
+    console.log(elements)
     // Set initial state here
     this.state = {
       text: "Initializing AR...",

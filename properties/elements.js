@@ -739,6 +739,60 @@ const elements = [
         visibility: false
     },
     {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
+        visibility: false
+    },
+    {
         name: "Lanthanum",
         symbol: "La",
         atomicNumber: 57, 
