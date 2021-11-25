@@ -84,7 +84,7 @@ export default class HelloWorldSceneAR extends Component {
         <Viro360Image
           onLoadEnd={this._onLoadEnd}
           source={require('./res/nasa.jpg')}
-        />        
+        />
 
         <ViroFlexView
           // backgroundColor="white"
@@ -144,6 +144,9 @@ export default class HelloWorldSceneAR extends Component {
           this.state.modalDetail &&
           <ViroFlexView style={styles.modalDetail} backgroundColor="rgba(204, 204, 204, 0.1)" width={3} height={3} position={[0, 0.0, -4.0]}>
             <ViroText onClick={this.handleModalclose} style={styles.closeModalDetail} text={"x"} height={.4} width={2.9} />
+            <ViroText color='#000000' style={styles.atomicNumber} text={this.state.elementSelected.atomicNumber + ""} height={.2} width={.2} />
+            <ViroText color='#000000' style={styles.elementSymbol} text={this.state.elementSelected.symbol} height={.3} width={.3} />
+            <ViroText color='#000000' style={styles.atomicNumber} text={this.state.elementSelected.name} height={.2} width={.2} />
           </ViroFlexView>
         }
 
@@ -204,6 +207,11 @@ var styles = StyleSheet.create({
     fontSize: 10,
   },
   modalDetail: {
+    // borderWidth: 3,
+    // borderColor: "white",
+    // borderStyle: "solid",
+    // borderRadius: 30,
+    // overflow: 'hidden'
   },
   closeModalDetail: {
     color: "white",
