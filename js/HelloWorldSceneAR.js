@@ -8,8 +8,8 @@ import { ViroARScene, ViroText, ViroConstants, Viro360Image, ViroMaterials, Viro
 
 export default class HelloWorldSceneAR extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.periodicTable = elements.map(el => {
       if (el.type === 'Nonmetal') {
@@ -28,7 +28,7 @@ export default class HelloWorldSceneAR extends Component {
         el.color = "#9EE5D4"
       }
       if (el.type === 'Halogen') {
-        el.color = "#9EE5D4"
+        el.color = "#8CED8C"
       }
       if (el.type === 'Alkaline earth metal') {
         el.color = "#F1F165"
@@ -45,7 +45,6 @@ export default class HelloWorldSceneAR extends Component {
       return el
     })
 
-    console.log(elements)
     // Set initial state here
     this.state = {
       text: "Initializing AR...",
@@ -70,45 +69,23 @@ export default class HelloWorldSceneAR extends Component {
     this.setState({
       modalDetail: false,
     })
-  }
+  }  
 
-  getElementColorType = (type) => () => {
-    if (type === 'Nonmetal') {
-      return "#8CED8C"
-    }
-    if (type === 'Noble gas') {
-      return "#E5BDE5"
-    }
-    if (type === 'Transition metal') {
-      return "#FAC5B7"
-    }
-    if (type === 'Alkali metal') {
-      return "#EACE5D"
-    }
-    if (type === 'Metalloid') {
-      return "#9EE5D4"
-    }
-    if (type === 'Halogen') {
-      return "#9EE5D4"
-    }
-    if (type === 'Alkaline earth metal') {
-      return "#F1F165"
-    }
-    if (type === 'Post-transition metal') {
-      return "#ACDFEC"
-    }
-    if (type === 'Lanthanide') {
-      return "#E7D09C"
-    }
-    if (type === 'Actinide') {
-      return "#F5CCDA"
+  _onLoadEnd = () => {
+    if(this.props.callbackWhenLoaded) {
+      this.props.callbackWhenLoaded()
     }
   }
 
-  render() {
+
+  render() {    
     return (
       <ViroARScene onTrackingUpdated={this.onTrackingUpdated} >
-        <Viro360Image source={require('./res/nasa.jpg')} />
+
+        <Viro360Image 
+          onLoadEnd={this._onLoadEnd} 
+          source={require('./res/nasa.jpg')} 
+        />
 
         <ViroFlexView
           // backgroundColor="white"
@@ -123,12 +100,12 @@ export default class HelloWorldSceneAR extends Component {
 
           {
             this.periodicTable.map((el, key) => {
-              if (el.visibility) {
+              if (el.visibility) {                
                 return (
                   <ViroFlexView
                     key={key}
                     width={1}
-                    height={key > 125 && key < 144 ? 0.6 : 1}
+                    height={1}
                     style={{
                       padding: .05,
                       alignItems: 'center',
@@ -154,7 +131,7 @@ export default class HelloWorldSceneAR extends Component {
                     style={styles.elementSquare}
                     key={key}
                     width={1}
-                    height={1}
+                    height={key > 125 && key < 144 ? 0.6 : 1}
                   />
 
                 )
