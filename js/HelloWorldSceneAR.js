@@ -1,7 +1,6 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Text } from 'react-native';
 import { StyleSheet } from 'react-native';
 import elements from '../properties/elements';
 import { ViroARScene, ViroText, ViroConstants, Viro360Image, ViroMaterials, ViroBox, ViroGeometry, Viro3DObject, ViroFlexView, ViroButton } from 'react-viro';
@@ -69,23 +68,23 @@ export default class HelloWorldSceneAR extends Component {
     this.setState({
       modalDetail: false,
     })
-  }  
+  }
 
   _onLoadEnd = () => {
-    if(this.props.callbackWhenLoaded) {
+    if (this.props.callbackWhenLoaded) {
       this.props.callbackWhenLoaded()
     }
   }
 
 
-  render() {    
+  render() {
     return (
       <ViroARScene onTrackingUpdated={this.onTrackingUpdated} >
 
-        <Viro360Image 
-          onLoadEnd={this._onLoadEnd} 
-          source={require('./res/nasa.jpg')} 
-        />
+        <Viro360Image
+          onLoadEnd={this._onLoadEnd}
+          source={require('./res/nasa.jpg')}
+        />        
 
         <ViroFlexView
           // backgroundColor="white"
@@ -100,7 +99,7 @@ export default class HelloWorldSceneAR extends Component {
 
           {
             this.periodicTable.map((el, key) => {
-              if (el.visibility) {                
+              if (el.visibility) {
                 return (
                   <ViroFlexView
                     key={key}
@@ -113,7 +112,7 @@ export default class HelloWorldSceneAR extends Component {
                     }}
                   >
                     <ViroFlexView
-                      style={styles.elementSquare}                      
+                      style={styles.elementSquare}
                       backgroundColor={el.color}
                       width={.9}
                       height={.9}
