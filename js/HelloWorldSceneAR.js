@@ -124,8 +124,9 @@ export default class HelloWorldSceneAR extends Component {
               if (el.visibility) {
                 return (
                   <ViroFlexView
+                    key={key}
                     width={1}
-                    height={1}
+                    height={key > 125 && key < 144 ? 0.6 : 1}
                     style={{
                       padding: .05,
                       alignItems: 'center',
@@ -133,8 +134,7 @@ export default class HelloWorldSceneAR extends Component {
                     }}
                   >
                     <ViroFlexView
-                      style={styles.elementSquare}
-                      key={key}
+                      style={styles.elementSquare}                      
                       backgroundColor={el.color}
                       width={.9}
                       height={.9}
