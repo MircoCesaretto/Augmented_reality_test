@@ -44,6 +44,8 @@ export default class HelloWorldSceneAR extends Component {
       }
       return el
     })
+
+    console.log(elements)
     // Set initial state here
     this.state = {
       text: "Initializing AR...",
@@ -124,6 +126,7 @@ export default class HelloWorldSceneAR extends Component {
               if (el.visibility) {
                 return (
                   <ViroFlexView
+                    key={key}
                     width={1}
                     height={1}
                     style={{
@@ -134,7 +137,6 @@ export default class HelloWorldSceneAR extends Component {
                   >
                     <ViroFlexView
                       style={styles.elementSquare}
-                      key={key}
                       backgroundColor={el.color}
                       width={.9}
                       height={.9}
