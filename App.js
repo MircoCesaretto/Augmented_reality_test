@@ -129,7 +129,7 @@ export default class ViroSample extends Component {
               alignItems: 'center'
             }}
           >
-            <ActivityIndicator size="large" color="#8D0801" />
+            <ActivityIndicator size="large" color="white" />
           </ImageBackground>
         }
 
