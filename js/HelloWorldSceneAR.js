@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import elements from '../properties/elements';
-import { ViroARScene, ViroText, ViroConstants, Viro360Image, ViroMaterials, ViroBox, ViroGeometry, Viro3DObject, ViroFlexView, ViroButton } from 'react-viro';
+import { ViroARScene, ViroText, ViroConstants, Viro360Image, ViroMaterials, ViroBox, ViroGeometry, Viro3DObject, ViroFlexView, ViroButton, ViroImage } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
 
@@ -48,7 +48,7 @@ export default class HelloWorldSceneAR extends Component {
     this.state = {
       text: "Initializing AR...",
       modalDetail: false,
-      elementSelected: null,
+      elementSelected: null
     };
 
     // bind 'this' to functions
@@ -142,11 +142,63 @@ export default class HelloWorldSceneAR extends Component {
 
         {
           this.state.modalDetail &&
-          <ViroFlexView style={styles.modalDetail} backgroundColor="rgba(204, 204, 204, 0.1)" width={3} height={3} position={[0, 0.0, -4.0]}>
-            <ViroText onClick={this.handleModalclose} style={styles.closeModalDetail} text={"x"} height={.4} width={2.9} />
-            <ViroText color='#000000' style={styles.atomicNumber} text={this.state.elementSelected.atomicNumber + ""} height={.2} width={.2} />
-            <ViroText color='#000000' style={styles.elementSymbol} text={this.state.elementSelected.symbol} height={.3} width={.3} />
-            <ViroText color='#000000' style={styles.atomicNumber} text={this.state.elementSelected.name} height={.2} width={.2} />
+          <ViroFlexView
+            style={styles.modalDetail}
+            backgroundColor="rgba(204, 204, 204, 0.1)"
+            width={3}
+            height={3}
+            position={[0, 0.0, -4.0]}
+          >
+            <ViroFlexView
+              width={3}
+              height={0.4}
+              // backgroundColor='green'
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                alignItems: 'center'
+              }}
+            >
+              <ViroImage
+                onClick={this.handleModalclose}
+                style={styles.closeModalDetail}
+                height={.4}
+                width={.4}
+                source={require('./res/close_icon.png')}                
+              />
+            </ViroFlexView>
+
+            <ViroFlexView
+              width={3}
+              height={2.6}  
+              // backgroundColor='red'            
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center'                
+              }}              
+            >
+              <ViroText
+                style={styles.atomicNumber}
+                text={this.state.elementSelected.atomicNumber + ""}
+                height={.2}
+                width={3}
+                color="#ffffff"
+              />
+              <ViroText
+                style={styles.elementSymbol}
+                text={this.state.elementSelected.symbol}
+                height={.3}
+                width={3}
+                color="#ffffff"
+              />
+              <ViroText
+                color="#ffffff"
+                style={styles.atomicNumber}
+                text={this.state.elementSelected.name}
+                height={.2}
+                width={3}
+              />
+            </ViroFlexView>
           </ViroFlexView>
         }
 
@@ -205,19 +257,6 @@ var styles = StyleSheet.create({
   atomicNumber: {
     textAlign: "center",
     fontSize: 10,
-  },
-  modalDetail: {
-    // borderWidth: 3,
-    // borderColor: "white",
-    // borderStyle: "solid",
-    // borderRadius: 30,
-    // overflow: 'hidden'
-  },
-  closeModalDetail: {
-    color: "white",
-    fontSize: 30,
-    textAlign: "right",
-    marginRight: 3
   }
 });
 
