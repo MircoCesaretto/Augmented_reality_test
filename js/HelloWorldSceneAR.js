@@ -249,7 +249,7 @@ var styles = StyleSheet.create({
   },
   elementSquare: {
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   elementSymbol: {
     textAlign: "center"

@@ -16,14 +16,17 @@ import {
   PixelRatio,
   TouchableHighlight,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  ImageBackground,
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 import {
   ViroVRSceneNavigator,
   ViroARSceneNavigator
 } from 'react-viro';
-
+import flask from "./js/res/flask.png"
 /*
  TODO: Insert your API key below
  */
@@ -46,7 +49,7 @@ var defaultNavigatorType = UNSET;
 export default class ViroSample extends Component {
   constructor() {
     super();
-
+    this.flaskk = Image.resolveAssetSource(flask).uri
     this.state = {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps,
@@ -80,22 +83,24 @@ export default class ViroSample extends Component {
   _getExperienceSelector() {
     return (
       <View style={localStyles.outer} >
+        <ImageBackground source={require("./js/res/bgHome.jpg")} resizeMode="cover" style={localStyles.bg} />
         <View style={localStyles.inner} >
 
           <Text style={localStyles.titleText}>
-            Choose your desired experience:
+            Explore the elements
           </Text>
 
-          <TouchableHighlight style={localStyles.buttons}
+          <TouchableOpacity style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'} >
-
-            <Text style={localStyles.buttonText}>AR</Text>
-          </TouchableHighlight>
+            <Image source={flask} style={localStyles.flask} />
+            {/* <Text style={localStyles.buttonText}>AR</Text> */}
+          </TouchableOpacity>
 
 
         </View>
       </View>
+
     );
   }
 
@@ -110,7 +115,8 @@ export default class ViroSample extends Component {
       >
         {
           this.state.arLoaded === false &&
-          <View
+          <ImageBackground
+          source={require("./js/res/bgHome.jpg")}
             style={{
               width: Dimensions.get('screen').width,
               height: Dimensions.get('screen').height,
@@ -124,18 +130,18 @@ export default class ViroSample extends Component {
             }}
           >
             <ActivityIndicator size="large" color="#8D0801" />
-          </View>
+          </ImageBackground>
         }
 
-        <ViroARSceneNavigator 
-          {...this.state.sharedProps}          
-          initialScene={{ 
+        <ViroARSceneNavigator
+          {...this.state.sharedProps}
+          initialScene={{
             scene: InitialARScene,
             passProps: {
-              callbackWhenLoaded: this.setArLoaded 
+              callbackWhenLoaded: this.setArLoaded
             }
           }}
-          
+
         />
 
       </View>
@@ -173,6 +179,14 @@ var localStyles = StyleSheet.create({
     flex: 1,
     backgroundColor: "black",
   },
+  bg: {
+    width: Dimensions.get('screen').width,
+    height: Dimensions.get('screen').height,
+    position: "absolute",
+
+    top: 0,
+    right: 0
+  },
   outer: {
     flex: 1,
     flexDirection: 'row',
@@ -183,14 +197,16 @@ var localStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: "black",
   },
   titleText: {
-    paddingTop: 30,
-    paddingBottom: 20,
-    color: '#fff',
+    paddingHorizontal: 10,
+    paddingVertical: 2,
+    marginBottom: 30,
+    color: "rgba(255,255,255,0.75)",
     textAlign: 'center',
-    fontSize: 25
+    fontSize: 30,
+    backgroundColor: "rgba(0,0,0,0.2)",
+    borderRadius: 20
   },
   buttonText: {
     color: '#fff',
@@ -198,16 +214,24 @@ var localStyles = StyleSheet.create({
     fontSize: 20
   },
   buttons: {
-    height: 80,
-    width: 150,
+    height: 140,
+    width: 140,
     paddingTop: 20,
     paddingBottom: 20,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: '#68a0cf',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#fff',
+    backgroundColor: 'rgba(0, 53, 127, 0.3)',
+    borderRadius: 140 / 2,
+    borderWidth: 4,
+    borderColor: 'rgba(255, 255, 255, 0.7)',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  flask: {
+    height: 60,
+    width: 60,
+    opacity: 0.7
   },
   exitButton: {
     height: 50,
